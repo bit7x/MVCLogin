@@ -38,7 +38,7 @@ namespace MVC_Login1.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (LoginDataEntities data = new LoginDataEntities())
+                using (mvcLoginEntities data = new mvcLoginEntities())
                 {
                     var values = data.Logins.Where(a => a.Username.Equals(l.Username) && a.Password.Equals(l.Password)).FirstOrDefault();
                     if (values != null)
