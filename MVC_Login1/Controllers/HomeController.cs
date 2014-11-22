@@ -32,6 +32,8 @@ namespace MVC_Login1.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(Login l)
         {
             if (ModelState.IsValid)
