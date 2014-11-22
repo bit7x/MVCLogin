@@ -59,6 +59,7 @@ namespace MVC_Login1.Controllers
         {
             if (Session["LogedUserID"] != null)
             {
+                Session.Clear();
                 return View();
             }
             else
