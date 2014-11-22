@@ -26,5 +26,39 @@ namespace MVC_Login1.Controllers
 
             return View();
         }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        public ActionResult Login(Login l)
+        {
+            if (ModelState.IsValid)
+            {
+                using (LoginDataEntities data = new LoginDataEntities())
+                {
+                    var values = data.Logins.Where(a => a.Username.Equals(l.Username) && a.Password.Equals(l.Password)).FirstOrDefault();
+                    if (values != null)
+                    {
+                        Session["LogedUserID"] = values.Username.ToString();
+                        return RedirectToAction("AfterLogin");
+                     }
+                }
+            }
+            return View(l);
+        }
+
+        public ActionResult AfterLogin()
+        {
+            if (Session["LogedUserID"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
     }
 }

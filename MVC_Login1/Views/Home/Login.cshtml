@@ -1,18 +1,46 @@
-﻿@{
-    Layout = null;
+﻿@model MVC_Login1.Login
+
+@{
+    ViewBag.Title = "Login";
 }
 
-<!DOCTYPE html>
+<h2>Login</h2>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Login Form</title>
-</head>
-<body>
-    <div>
-        <h3>Login Now</h3>
 
-    </div>
-</body>
-</html>
+   @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+   {
+       @Html.AntiForgeryToken()
+       @Html.ValidationSummary(true)
+       if (@ViewBag.Message != null)
+       {
+           <div style="border:1px solid red">
+               @ViewBag.Message
+           </div>
+       }
+       <table>
+           <tr>
+               <td>@Html.LabelFor(a=> a.Username)</td>
+               <td>@Html.TextBoxFor(a=> a.Username)</td>
+               <td>@Html.ValidationMessageFor(a => a.Username)</td>
+           </tr>
+
+           <tr>
+               <td>@Html.LabelFor(a=> a.Password)</td>
+               <td>@Html.TextBoxFor(a=> a.Password)</td>
+               <td>@Html.ValidationMessageFor(a=> a.Password)</td>
+           </tr>
+
+           <tr>
+               <td></td>
+               <td>
+                   <input type="submit" value="Login"/>
+               </td>
+               <td></td>
+           </tr>
+       </table>
+        
+   }
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
