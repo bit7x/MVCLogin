@@ -63,7 +63,9 @@ namespace MVC_Login1.Controllers
             }
             else
             {
+                Session.Clear();
                 return RedirectToAction("FailedLogin");
+                
             }
         }
 
