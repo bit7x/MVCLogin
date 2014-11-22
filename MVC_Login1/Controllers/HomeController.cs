@@ -46,6 +46,10 @@ namespace MVC_Login1.Controllers
                         Session["LogedUserID"] = values.Username.ToString();
                         return RedirectToAction("AfterLogin");
                      }
+                    else
+                    {
+                        return RedirectToAction("FailedLogin");
+                    }
                 }
             }
             return View(l);
@@ -59,7 +63,19 @@ namespace MVC_Login1.Controllers
             }
             else
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("FailedLogin");
+            }
+        }
+
+        public ActionResult FailedLogin()
+        {
+            if (Session["LogedUserID"] != null)
+            {
+                return RedirectToAction("AfterLogin");
+            }
+            else
+            {
+                return View();
             }
         }
     }
